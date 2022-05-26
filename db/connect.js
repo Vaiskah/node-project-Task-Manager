@@ -1,14 +1,12 @@
 const mongoose = require("mongoose");
 
-const connectionString =
-  "mongodb+srv://Vaisakh_1995:9645415699@nodeexpressproject.c3vjcyz.mongodb.net/03-TASK-MANAGER?retryWrites=true&w=majority";
-
-mongoose
-  .connect(connectionString, {
+const connectDB = (url) => {
+  return mongoose.connect(url, {
     useNewUrlParser: true, //these are the keys to remove the warnings when mongoose connected
-    useCreateIndex: true, // so that connected to the db is after the listening server otherwise some warnings in between them
+    useCreateIndex: true, // so that after connecting to db, in between the "listening server" and "connected to the db" some warnings came.
     useFindAndModify: false,
     useUnifiedTopology: true,
-  })
-  .then(() => console.log("CONNECTED TO THE DB....."))
-  .catch((err) => console.log(err));
+  });
+};
+
+module.exports = connectDB;
